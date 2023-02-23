@@ -1,15 +1,26 @@
 part of 'home_bloc.dart';
 
-@immutable
-abstract class HomeState {}
+class _HomeInitial {}
 
-class HomeInitial extends HomeState {}
+class _HomeLoading {}
 
-class HomeLoading extends HomeState {}
-
-class HomeLoaded extends HomeState {
-  HomeLoaded({required this.model});
+class _HomeLoaded {
+  _HomeLoaded({required this.model});
   final PersonModel model;
 }
 
-class HomeError extends HomeState {}
+class _HomeError {}
+
+class HomeState
+    extends Union4Impl<_HomeInitial, _HomeLoading, _HomeLoaded, _HomeError> {
+  static const factory =
+      Quartet<_HomeInitial, _HomeLoading, _HomeLoaded, _HomeError>();
+  HomeState._(Union4<_HomeInitial, _HomeLoading, _HomeLoaded, _HomeError> union)
+      : super(union);
+
+  factory HomeState.initial() => HomeState._(factory.first(_HomeInitial()));
+  factory HomeState.loading() => HomeState._(factory.second(_HomeLoading()));
+  factory HomeState.loaded(PersonModel model) =>
+      HomeState._(factory.third(_HomeLoaded(model: model)));
+  factory HomeState.error() => HomeState._(factory.fourth(_HomeError()));
+}

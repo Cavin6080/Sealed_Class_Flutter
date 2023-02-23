@@ -36,35 +36,32 @@ class HomeScreen extends StatelessWidget {
         children: [
           BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
-              if (state is HomeLoaded) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: state.model.people?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          state.model.people?[index].name ?? "",
-                        ),
-                      );
-                    },
-                  ),
-                );
-              } else if (state is HomeLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is HomeError) {
-                return const Center(
-                  child: Text("a big erro"),
-                );
-              } else {
-                return const Padding(
+              return state.join(
+                (initial) => const Padding(
                   padding: EdgeInsets.only(top: 15),
                   child: Center(
                     child: Text("No data to show"),
                   ),
-                );
-              }
+                ),
+                (loading) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                (loaded) => Expanded(
+                  child: ListView.builder(
+                    itemCount: loaded.model.people?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          loaded.model.people?[index].name ?? "",
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                (error) => const Center(
+                  child: Text("a big erro"),
+                ),
+              );
             },
           )
         ],
