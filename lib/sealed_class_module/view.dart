@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sealed_class/data/api.dart';
 import 'package:sealed_class/data/repository.dart';
 import 'package:sealed_class/sealed_class_module/bloc/home_bloc.dart';
+import 'package:sealed_class/sealed_class_module/bloc/home_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -32,29 +33,39 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          BlocBuilder<HomeBloc, HomeState>(
+          BlocConsumer<HomeBloc, HomeState>(
+            listener: (context, state) => state.maybeWhen(
+              error: () => ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    "Not Available",
+                  ),
+                ),
+              ),
+              orElse: () => -1,
+            ),
             builder: (context, state) {
-              return state.join(
-                (initial) => const Center(
+              return state.when(
+                initial: () => const Center(
                   child: Text("No data to show"),
                 ),
-                (loading) => const Center(
+                loading: () => const Center(
                   child: CircularProgressIndicator(),
                 ),
-                (loaded) => Expanded(
+                loaded: (model) => Expanded(
                   child: ListView.builder(
-                    itemCount: loaded.model.people?.length ?? 0,
+                    itemCount: model.people?.length ?? 0,
                     itemBuilder: (context, index) {
                       return ListTile(
                         title: Text(
-                          loaded.model.people?[index].name ?? "",
+                          model.people?[index].name ?? "",
                         ),
                       );
                     },
                   ),
                 ),
-                (error) => const Center(
-                  child: Text("a big erro"),
+                error: () => const Center(
+                  child: Text("Something went wrong"),
                 ),
               );
             },
