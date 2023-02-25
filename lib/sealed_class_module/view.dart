@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 (error) => const Center(
-                  child: Text("a big erro"),
+                  child: Text("Something went wrong"),
                 ),
               );
             },
