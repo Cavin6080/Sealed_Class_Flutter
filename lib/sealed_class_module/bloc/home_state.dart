@@ -6,7 +6,6 @@ part 'home_state.freezed.dart';
 
 @freezed
 abstract class HomeState with _$HomeState {
-  // "Nested" unions have private generated classes (underscore)
   const factory HomeState.initial() = _HomeInitial;
   const factory HomeState.loading() = _HomeLoading;
   const factory HomeState.loaded(PersonModel model) = _HomeLoaded;
