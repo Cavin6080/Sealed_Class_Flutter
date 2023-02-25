@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                 );
               } else if (state is HomeError) {
                 return const Center(
-                  child: Text("a big erro"),
+                  child: Text("Something went wrong."),
                 );
               } else {
                 return const Padding(
