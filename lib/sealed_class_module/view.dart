@@ -1,9 +1,5 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sealed_class/data/api.dart';
 import 'package:sealed_class/data/repository.dart';
@@ -33,15 +29,14 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
           BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
               return state.join(
-                (initial) => const Padding(
-                  padding: EdgeInsets.only(top: 15),
-                  child: Center(
-                    child: Text("No data to show"),
-                  ),
+                (initial) => const Center(
+                  child: Text("No data to show"),
                 ),
                 (loading) => const Center(
                   child: CircularProgressIndicator(),
@@ -75,12 +70,16 @@ class HomeScreen extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 10),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.amber,
+            color: Colors.green,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: const Center(
+          child: Center(
             child: Text(
-              "GetData",
+              "Get Data",
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
             ),
           ),
         ),
