@@ -1,16 +1,23 @@
-# sealed_class
 
-A new Flutter project.
+# Sealed Class With Flutter and BLoC
 
-## Getting Started
+This repository contains the integration of **sealed_unions** / **freezed** package in Flutter.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+## Setup
+
+- Download/Clone this project into your local system.
+- There will be 3 branches
+- The first one is for just simple API call using BLoC
+- second one is for API call using [sealed_unions](https://pub.dev/packages/sealed_unions) with BLoC.
+- Third one is for API calling using [freezed](https://pub.dev/packages/freezed) along with BLoC.
+
+
+## Authors
+
+- [@cavin](https://www.github.com/octokatherine)
+
